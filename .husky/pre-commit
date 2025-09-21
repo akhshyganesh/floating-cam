@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Pre-commit hook for Husky
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+npm run type-check

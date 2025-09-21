@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: mediastream:; connect-src 'self';" />
+    <title>Floating Cam</title>
+  </head>
+  <body>
+    <div id="app">
+      <div
+        class="toolbar"
+        id="drag-region"
+        role="toolbar"
+        aria-label="Floating Cam Controls"
+      >
+        <span class="title">Floating Cam</span>
+        <button
+          id="toggleBtn"
+          title="Toggle Controls"
+          aria-label="Toggle Controls"
+          class="toggle-btn"
+        >
+          ⚙️
+        </button>
+      </div>
+      <div id="contentArea">
+        <video id="video" autoplay playsinline muted></video>
+        <div id="errorMessage" class="error-message" hidden>
+          <span class="error-icon">📷</span>
+          <span class="error-text">Camera unavailable</span>
+          <button id="retryBtn" class="retry-btn">Retry</button>
+        </div>
+      </div>
+
+      <!-- Controls Overlay -->
+      <div id="controlsOverlay" class="controls-overlay" hidden>
+        <div class="overlay-content">
+          <div class="overlay-header">
+            <h3>Controls</h3>
+            <button id="closeOverlayBtn" class="close-btn">×</button>
+          </div>
+          <div class="controls-grid">
+            <button
+              id="flipBtn"
+              title="Flip Horizontal"
+              aria-label="Flip Horizontal"
+            >
+              <span class="icon">🔄</span>
+              <span>Flip</span>
+            </button>
+            <button
+              id="circleBtn"
+              title="Toggle Circle"
+              aria-label="Toggle Circle"
+            >
+              <span class="icon">⭕</span>
+              <span>Circle</span>
+            </button>
+            <button
+              id="opacityBtn"
+              title="Cycle Opacity"
+              aria-label="Cycle Opacity"
+            >
+              <span class="icon">👁️</span>
+              <span>Opacity</span>
+            </button>
+            <button
+              id="settingsBtn"
+              title="Resize / Settings"
+              aria-label="Resize / Settings"
+            >
+              <span class="icon">📐</span>
+              <span>Size</span>
+            </button>
+          </div>
+          <div class="radius-control">
+            <label for="radiusRange">Border Radius</label>
+            <input
+              id="radiusRange"
+              type="range"
+              min="0"
+              max="50"
+              value="16"
+              title="Border Radius %"
+              aria-label="Border Radius"
+            />
+            <span id="radiusValue">16%</span>
+          </div>
+
+          <!-- Size Panel inside overlay -->
+          <div id="sizePanel" class="size-panel" hidden>
+            <div class="panel-header">
+              <h4>Window Size</h4>
+            </div>
+            <div class="row dims">
+              <label for="widthInput">W</label>
+              <input id="widthInput" type="number" min="160" step="10" />
+              <label for="heightInput">H</label>
+              <input id="heightInput" type="number" min="160" step="10" />
+              <button id="applySizeBtn" aria-label="Apply Size">Apply</button>
+            </div>
+            <div class="presets row">
+              <button data-preset="1:1">1:1</button>
+              <button data-preset="4:3">4:3</button>
+              <button data-preset="16:9">16:9</button>
+              <button data-preset="9:16">9:16</button>
+            </div>
+          </div>
+
+          <!-- Advanced Settings Panel -->
+          <div id="advancedPanel" class="advanced-panel" hidden>
+            <div class="panel-header">
+              <h4>Advanced Settings</h4>
+            </div>
+            <div class="setting-row">
+              <label for="globalShortcuts">Global Shortcuts</label>
+              <input type="checkbox" id="globalShortcuts" />
+            </div>
+            <div class="setting-row">
+              <label for="autoStart">Auto Start</label>
+              <input type="checkbox" id="autoStart" />
+            </div>
+            <div class="setting-row">
+              <label for="themeSelect">Theme</label>
+              <select id="themeSelect">
+                <option value="auto">Auto</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </div>
+            <div class="actions">
+              <button id="exportBtn">Export Settings</button>
+              <button id="importBtn">Import Settings</button>
+              <button id="resetBtn">Reset to Defaults</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="resizeHandle" aria-label="Resize Handle"></div>
+    </div>
+  </body>
+</html>
